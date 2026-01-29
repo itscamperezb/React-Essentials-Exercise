@@ -39,7 +39,10 @@ function App() {
           <ul>
             {concepts.map((item) => {
               return (
+                // key es una props espacial que pide react para cuando hacesmos listas, no hace mas que identificar
+                // cada elemento de la lista para optimizar el renderizado
                 <CoreConcept
+                  key={item.title}
                   title={item.title}
                   description={item.description}
                   image={item.image}
@@ -69,12 +72,35 @@ function App() {
 
             {/* Parte 2:
              Ahora para poder hacer que el contenido cambie segun el boton seleccionado */}
-            <TabButton onSelect={() => handleClick("components")}>
+            {/* al escribir selectedTopic === "components" dentro de isSelected
+             estamos haciendo un conditional rendering, es decir, si selectedTopic es igual a "components"
+             entonces isSelected va a ser true y por lo tanto el boton tendra la clase "active" que está en el css
+             de TabButton.jsx */}
+
+            <TabButton
+              isSelected={selectedTopic === "components"}
+              onSelect={() => handleClick("components")}
+            >
               Components
             </TabButton>
-            <TabButton onSelect={() => handleClick("jsx")}>JSX</TabButton>
-            <TabButton onSelect={() => handleClick("props")}>Props</TabButton>
-            <TabButton onSelect={() => handleClick("state")}>State</TabButton>
+            <TabButton
+              isSelected={selectedTopic === "jsx"}
+              onSelect={() => handleClick("jsx")}
+            >
+              JSX
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "props"}
+              onSelect={() => handleClick("props")}
+            >
+              Props
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "state"}
+              onSelect={() => handleClick("state")}
+            >
+              State
+            </TabButton>
             {/* al colocar handleClick() dentro de una arrow function "() => handleClick()"" lo hacemos porque necesitamos que handleClick 
             reciba un input, ya sea "Components", "JSX", etc. y asi poder hacer que el contenido cambie segun el boton seleccionado
             si no la metemos dentro de la arrow function, al poner solo "handleClick()" hace que la funcion se ejecute cuando la linea de codigo <TabButton> se ejecute.

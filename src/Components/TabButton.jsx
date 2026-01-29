@@ -7,7 +7,12 @@ import "../index.css";
 function TabButton(props) {
   return (
     <li>
-      <button onClick={props.onSelect}>{props.children}</button>
+      <button
+        className={props.isSelected ? "active" : undefined}
+        onClick={props.onSelect}
+      >
+        {props.children}
+      </button>
     </li>
     //NOTA: cuando escribo una funcion dentro de un event como "onClick" esta funcion la debo llamar sin usar los () ya que al ponerlos
     // hace que la funcion se ejecute cuando la linea de codigo <button> se ejecute. pero yo en verdad lo que quiero es que se ejecute cuando
